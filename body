@@ -1,0 +1,898 @@
+############################################################################
+ordinal = read.csv("../Desktop/MDataFiles_Stage1/MMasseyOrdinals.csv")
+
+
+osu = c(8, 65, 70)
+uo = c(9, 70, 65)
+df = data.frame(osu, uo)
+df = t(df)
+colnames(df) = c('Seed', 'PtsScored', 'PtsAllowed')
+
+model = glm(family = binomial (link = 'logit'), data = df)
+##############################################################################
+#Load Data
+############################################################################
+stats = read.csv("MDataFiles_Stage1/MRegularSeasonDetailedResults.csv")
+seeds = read.csv("MDataFiles_Stage2/MNCAATourneySeeds.csv")
+teamIDs = read.csv("MDataFiles_Stage2/MTeams.csv")
+year2022stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2021stats <- data.frame(matrix(ncol = 34, nrow= 3855))
+year2019stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2018stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2017stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2016stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2015stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2014stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2013stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2012stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2011stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2010stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2009stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2008stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2007stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2006stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2005stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2004stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+year2003stats <- data.frame(matrix(ncol = 34, nrow= 7000))
+
+#Get each year stats
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2022) {
+    year2022stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2021) {
+    year2021stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2019) {
+    year2019stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2018) {
+    year2018stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2017) {
+    year2017stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2016) {
+    year2016stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2015) {
+    year2015stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2014) {
+    year2014stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2013) {
+    year2013stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2012) {
+    year2012stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2011) {
+    year2011stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2010) {
+    year2010stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2009) {
+    year2009stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2008) {
+    year2008stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2007) {
+    year2007stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2006) {
+    year2006stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2005) {
+    year2005stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2004) {
+    year2004stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+x = 1
+for (row in 1:nrow(stats)){
+  if (stats$Season[row] == 2003) {
+    year2003stats[x,] = stats[row,]
+    x = x + 1
+  }
+}
+
+colnames(year2022stats) = colnames(stats)
+colnames(year2021stats) = colnames(stats)
+colnames(year2019stats) = colnames(stats)
+colnames(year2018stats) = colnames(stats)
+colnames(year2017stats) = colnames(stats)
+colnames(year2016stats) = colnames(stats)
+colnames(year2015stats) = colnames(stats)
+colnames(year2014stats) = colnames(stats)
+colnames(year2013stats) = colnames(stats)
+colnames(year2012stats) = colnames(stats)
+colnames(year2011stats) = colnames(stats)
+colnames(year2010stats) = colnames(stats)
+colnames(year2009stats) = colnames(stats)
+colnames(year2008stats) = colnames(stats)
+colnames(year2007stats) = colnames(stats)
+colnames(year2006stats) = colnames(stats)
+colnames(year2005stats) = colnames(stats)
+colnames(year2004stats) = colnames(stats)
+colnames(year2003stats) = colnames(stats)
+year2022stats = drop_na(year2022stats)
+year2021stats = drop_na(year2021stats)
+year2019stats = drop_na(year2019stats)
+year2018stats = drop_na(year2018stats)
+year2017stats = drop_na(year2017stats)
+year2016stats = drop_na(year2016stats)
+year2015stats = drop_na(year2015stats)
+year2014stats = drop_na(year2014stats)
+year2013stats = drop_na(year2013stats)
+year2012stats = drop_na(year2012stats)
+year2011stats = drop_na(year2011stats)
+year2010stats = drop_na(year2010stats)
+year2009stats = drop_na(year2009stats)
+year2008stats = drop_na(year2008stats)
+year2007stats = drop_na(year2007stats)
+year2006stats = drop_na(year2006stats)
+year2005stats = drop_na(year2005stats)
+year2004stats = drop_na(year2004stats)
+year2003stats = drop_na(year2003stats)
+#############################################################################
+  
+#Get NCAA tourney seeds
+tourneyTeams2022 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2021 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2019 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2018 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2017 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2016 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2015 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2014 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2013 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2012 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2011 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2010 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2009 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2008 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2007 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2006 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2005 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2004 = data.frame(matrix(ncol = 1, nrow = 68))
+tourneyTeams2003 = data.frame(matrix(ncol = 1, nrow = 68))
+
+#Get the teams that made it to the march madness tournament each year
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2022) {
+    tourneyTeams2022[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2021) {
+    tourneyTeams2021[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2019) {
+    tourneyTeams2019[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2018) {
+    tourneyTeams2018[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2017) {
+    tourneyTeams2017[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2016) {
+    tourneyTeams2016[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2015) {
+    tourneyTeams2015[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2014) {
+    tourneyTeams2014[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2013) {
+    tourneyTeams2013[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2012) {
+    tourneyTeams2012[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2011) {
+    tourneyTeams2011[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2010) {
+    tourneyTeams2010[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2009) {
+    tourneyTeams2009[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2008) {
+    tourneyTeams2008[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2007) {
+    tourneyTeams2007[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2006) {
+    tourneyTeams2006[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2005) {
+    tourneyTeams2005[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2004) {
+    tourneyTeams2004[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+x=1
+for (row in 1:nrow(seeds)){
+  if(seeds$Season[row] == 2003) {
+    tourneyTeams2003[x,] = seeds$TeamID[row]
+    x = x + 1
+  }
+}
+
+tourneyTeams2022 = drop_na(tourneyTeams2022)
+tourneyTeams2021 = drop_na(tourneyTeams2021)
+tourneyTeams2019 = drop_na(tourneyTeams2019)
+tourneyTeams2018 = drop_na(tourneyTeams2018)
+tourneyTeams2017 = drop_na(tourneyTeams2017)
+tourneyTeams2016 = drop_na(tourneyTeams2016)
+tourneyTeams2015 = drop_na(tourneyTeams2015)
+tourneyTeams2014 = drop_na(tourneyTeams2014)
+tourneyTeams2013 = drop_na(tourneyTeams2013)
+tourneyTeams2012 = drop_na(tourneyTeams2012)
+tourneyTeams2011 = drop_na(tourneyTeams2011)
+tourneyTeams2010 = drop_na(tourneyTeams2010)
+tourneyTeams2009 = drop_na(tourneyTeams2009)
+tourneyTeams2008 = drop_na(tourneyTeams2008)
+tourneyTeams2007 = drop_na(tourneyTeams2007)
+tourneyTeams2006 = drop_na(tourneyTeams2006)
+tourneyTeams2005 = drop_na(tourneyTeams2005)
+tourneyTeams2004 = drop_na(tourneyTeams2004)
+tourneyTeams2003 = drop_na(tourneyTeams2003)
+
+
+
+
+
+  
+#Get averages of the season Ohio #1325
+count = 0
+ptspergame = 0
+threeptmade = 0
+threeptattempt = 0
+ftmade = 0 
+ftattempt = 0
+rebounds = 0
+blocks = 0
+ptsallowed = 0
+
+
+for (row in 1:nrow(year2021stats)){
+  if (year2021stats$WTeamID[row] == 1325){
+    ptspergame = ptspergame + year2021stats$WScore[row]
+    threeptmade = threeptmade + year2021stats$WFGM3[row]
+    threeptattempt = threeptattempt + year2021stats$WFGA3[row]
+    ftmade = ftmade + year2021stats$WFTM[row]
+    ftattempt = ftattempt + year2021stats$WFTA[row]
+    rebounds = rebounds + year2021stats$WOR[row] + year2021stats$WDR[row]
+    blocks = blocks + year2021stats$WBlk[row]
+    ptsallowed = ptsallowed + year2021stats$LScore[row]
+    count = count + 1
+  }
+  if (year2021stats$LTeamID[row] == 1325){
+    ptspergame = ptspergame + year2021stats$LScore[row]
+    threeptmade = threeptmade + year2021stats$LFGM3[row]
+    threeptattempt = threeptattempt + year2021stats$LFGA3[row]
+    ftmade = ftmade + year2021stats$LFTM[row]
+    ftattempt = ftattempt + year2021stats$LFTA[row]
+    rebounds = rebounds + year2021stats$LOR[row] + year2021stats$LDR[row]
+    blocks = blocks + year2021stats$LBlk[row]
+    ptsallowed = ptsallowed + year2021stats$WScore[row]
+    count = count + 1
+  }
+}
+
+avgpts = ptspergame/count
+avgptsallowed = ptsallowed/count
+threeptpercentage = threeptmade/threeptattempt
+ftpercentage = ftmade/ftattempt
+avgrebound = rebounds/count
+avgblocks = blocks/count
+########################################################################
+#STAT MAKER FUNCTION
+########################################################################
+statmaker = function(team) {
+  count = 0
+  ptspergame = 0
+  threeptmade = 0
+  threeptattempt = 0
+  ftmade = 0 
+  ftattempt = 0
+  rebounds = 0
+  blocks = 0
+  ptsallowed = 0
+  
+  
+  for (row in 1:nrow(year2021stats)){
+    if (year2021stats$WTeamID[row] == team){
+      ptspergame = ptspergame + year2021stats$WScore[row]
+      threeptmade = threeptmade + year2021stats$WFGM3[row]
+      threeptattempt = threeptattempt + year2021stats$WFGA3[row]
+      ftmade = ftmade + year2021stats$WFTM[row]
+      ftattempt = ftattempt + year2021stats$WFTA[row]
+      rebounds = rebounds + year2021stats$WOR[row] + year2021stats$WDR[row]
+      blocks = blocks + year2021stats$WBlk[row]
+      ptsallowed = ptsallowed + year2021stats$LScore[row]
+      count = count + 1
+    }
+    if (year2021stats$LTeamID[row] == team){
+      ptspergame = ptspergame + year2021stats$LScore[row]
+      threeptmade = threeptmade + year2021stats$LFGM3[row]
+      threeptattempt = threeptattempt + year2021stats$LFGA3[row]
+      ftmade = ftmade + year2021stats$LFTM[row]
+      ftattempt = ftattempt + year2021stats$LFTA[row]
+      rebounds = rebounds + year2021stats$LOR[row] + year2021stats$LDR[row]
+      blocks = blocks + year2021stats$LBlk[row]
+      ptsallowed = ptsallowed + year2021stats$WScore[row]
+      count = count + 1
+    }
+  }
+  
+  avgpts = ptspergame/count
+  avgptsallowed = ptsallowed/count
+  threeptpercentage = threeptmade/threeptattempt
+  ftpercentage = ftmade/ftattempt
+  avgrebound = rebounds/count
+  avgblocks = blocks/count
+  
+  statvector = data.frame(matrix(nrow = 1, ncol = 8))
+  statvector[1] = team
+  statvector[2] = avgpts
+  statvector[3] = avgptsallowed
+  statvector[4] = threeptpercentage
+  statvector[5] = ftpercentage
+  statvector[6] = ftattempt
+  statvector[7] = avgrebound
+  statvector[8] = avgblocks
+  return (statvector)
+
+}
+##############################################################################
+cnames=c("Team","AvgPts","AvgPtsAllowed","ThreePtPercentage","FTPercentage",
+         "FTAttempts", "AvgRebounds", "AvgBlocks")
+teamsThatMatterStats22 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats21 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats19 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats18 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats17 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats16 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats15 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats14 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats13 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats12 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats11 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats10 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats09 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats08 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats07 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats06 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats05 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats04 = data.frame(matrix(nrow = 68, ncol = 8))
+teamsThatMatterStats03 = data.frame(matrix(nrow = 68, ncol = 8))
+
+#Put the teams that made it to the tournament together
+x=1
+for (row in 1:nrow(tourneyTeams2022)) {
+  teamsThatMatterStats22[x,] = statmaker(tourneyTeams2022[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2021)) {
+  teamsThatMatterStats21[x,] = statmaker(tourneyTeams2021[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2019)) {
+  teamsThatMatterStats19[x,] = statmaker(tourneyTeams2019[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2018)) {
+  teamsThatMatterStats18[x,] = statmaker(tourneyTeams2018[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2017)) {
+  teamsThatMatterStats17[x,] = statmaker(tourneyTeams2017[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2016)) {
+  teamsThatMatterStats16[x,] = statmaker(tourneyTeams2016[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2015)) {
+  teamsThatMatterStats15[x,] = statmaker(tourneyTeams2015[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2014)) {
+  teamsThatMatterStats14[x,] = statmaker(tourneyTeams2014[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2013)) {
+  teamsThatMatterStats13[x,] = statmaker(tourneyTeams2013[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2012)) {
+  teamsThatMatterStats12[x,] = statmaker(tourneyTeams2012[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2011)) {
+  teamsThatMatterStats11[x,] = statmaker(tourneyTeams2011[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2010)) {
+  teamsThatMatterStats10[x,] = statmaker(tourneyTeams2010[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2009)) {
+  teamsThatMatterStats09[x,] = statmaker(tourneyTeams2009[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2008)) {
+  teamsThatMatterStats08[x,] = statmaker(tourneyTeams2008[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2007)) {
+  teamsThatMatterStats07[x,] = statmaker(tourneyTeams2007[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2006)) {
+  teamsThatMatterStats06[x,] = statmaker(tourneyTeams2006[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2005)) {
+  teamsThatMatterStats05[x,] = statmaker(tourneyTeams2005[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2004)) {
+  teamsThatMatterStats04[x,] = statmaker(tourneyTeams2004[row,])
+  x = x + 1
+}
+x=1
+for (row in 1:nrow(tourneyTeams2003)) {
+  teamsThatMatterStats03[x,] = statmaker(tourneyTeams2003[row,])
+  x = x + 1
+}
+
+
+
+colnames(teamsThatMatterStats03) = cnames
+colnames(teamsThatMatterStats04) = cnames
+colnames(teamsThatMatterStats05) = cnames
+colnames(teamsThatMatterStats06) = cnames
+colnames(teamsThatMatterStats07) = cnames
+colnames(teamsThatMatterStats08) = cnames
+colnames(teamsThatMatterStats09) = cnames
+colnames(teamsThatMatterStats10) = cnames
+colnames(teamsThatMatterStats11) = cnames
+colnames(teamsThatMatterStats12) = cnames
+colnames(teamsThatMatterStats13) = cnames
+colnames(teamsThatMatterStats14) = cnames
+colnames(teamsThatMatterStats15) = cnames
+colnames(teamsThatMatterStats16) = cnames
+colnames(teamsThatMatterStats17) = cnames
+colnames(teamsThatMatterStats18) = cnames
+colnames(teamsThatMatterStats19) = cnames
+colnames(teamsThatMatterStats21) = cnames
+colnames(teamsThatMatterStats22) = cnames
+
+#Replace ID with team name
+
+for (i in 1:nrow(teamsThatMatterStats03)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats03$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats03$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats04)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats04$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats04$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats05)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats05$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats05$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats06)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats06$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats06$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats07)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats07$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats07$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats08)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats08$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats08$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats09)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats09$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats09$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats10)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats10$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats10$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats11)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats11$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats11$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats12)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats12$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats12$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats13)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats13$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats13$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats14)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats14$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats14$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats15)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats15$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats15$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats16)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats16$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats16$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats17)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats17$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats17$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats18)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats18$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats18$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats19)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats19$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats19$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats21)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats21$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats21$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+for (i in 1:nrow(teamsThatMatterStats22)) {
+  for (j in 1:nrow(teamIDs)) {
+    if (teamsThatMatterStats22$Team[i] == teamIDs$TeamID[j]){
+      teamsThatMatterStats22$Team[i] = teamIDs$TeamName[j]
+    }
+  }
+}
+
+
+teamsThatMatterStats03 = drop_na(teamsThatMatterStats03)
+teamsThatMatterStats04 = drop_na(teamsThatMatterStats04)
+teamsThatMatterStats05 = drop_na(teamsThatMatterStats05)
+teamsThatMatterStats06 = drop_na(teamsThatMatterStats06)
+teamsThatMatterStats07 = drop_na(teamsThatMatterStats07)
+teamsThatMatterStats08 = drop_na(teamsThatMatterStats08)
+teamsThatMatterStats09 = drop_na(teamsThatMatterStats09)
+teamsThatMatterStats10 = drop_na(teamsThatMatterStats10)
+teamsThatMatterStats11 = drop_na(teamsThatMatterStats11)
+teamsThatMatterStats12 = drop_na(teamsThatMatterStats12)
+teamsThatMatterStats13 = drop_na(teamsThatMatterStats13)
+teamsThatMatterStats14 = drop_na(teamsThatMatterStats14)
+teamsThatMatterStats15 = drop_na(teamsThatMatterStats15)
+teamsThatMatterStats16 = drop_na(teamsThatMatterStats16)
+teamsThatMatterStats17 = drop_na(teamsThatMatterStats17)
+teamsThatMatterStats18 = drop_na(teamsThatMatterStats18)
+teamsThatMatterStats19 = drop_na(teamsThatMatterStats19)
+teamsThatMatterStats21 = drop_na(teamsThatMatterStats21)
+teamsThatMatterStats22 = drop_na(teamsThatMatterStats22)
+
+teamsThatUpset03 = c("Tulsa", "C Michigan", "Arizona St", "Butler",
+                     "Maryland", "Michigan St", "Auburn")
+teamsThatUpset04 = c("Pacific", "Nevada", "Manhattan", "UAB", "Xavier", 
+                     "Alabama", "Vanderbilt")
+teamsThatUpset05 = c("WI Milwaukee", "UAB", "Bucknell", "NC State",
+                     "Vermont", "Texas Tech", "West Virginia", "Michigan St", 
+                     "Utah")
+teamsThatUpset06 = c("Texas A&M", "NC State", "Bradley", "Alabama", 
+                     "George Mason", "Montana", "Milwaukee", "Wichita St",
+                     "Georgetown")
+teamsThatUpset07 = c("Winthrop", "VCU", "UNLV", "Vanderbilt")
+teamsThatUpset08 = c("Villanova", "Siena", 'Kansas St', "Davidson", "WKU",
+                     "San Diego")
+teamsThatUpset09 = c("Arizona", "Cleveland St", "Dayton", "USC", "Maryland",
+                     "Wisconsin", "WKU", "Michigan")
+teamsThatUpset10 = c("Cornell", "Washington", "Missouri", "Murray St",
+                     "Old Dominion", "St Mary's CA", "Ohio", "Georgia Tech",
+                     "Xavier", "Northern Iowa", "Butler", "Tennessee")
+teamsThatUpset11 = c("Marquette", "Morehead St", "Richmond", "Florida St", 
+                     "Gonzaga", "VCU", "Butler", "Kentucky", "Arizona")
+teamsThatUpset12 = c("Norfolk St", "Lehigh", "VCU", "Colorado", "Xavier", 
+                     "Ohio", "South Florida", "NC State", "Purdue",
+                     "Cincinatti", "Louisville", "Florida")
+teamsThatUpset13 = c('Oregon', "Harvard", "La Salle", "Mississippi", "Iowa St",
+                     "California", "Minnesota", "Wichita St", "Syracuse",
+                     "Michigan")
+teamsThatUpset14 = c("Mercer", "Tennessee", "N Dakota St", "Harvard", 
+                     "SF Austin", "Dayton", "Kentucky", "Baylor", "Stanford",
+                     "Connecticut")
+teamsThatUpset15 = c("Georgia St", "Ohio St", "Dayton", "UAB", "UCLA", 
+                     "Wichita St", "NC State", "Michigan St")
+teamsThatUpset16 = c('sF Austin', "Yale", "Northern Iowa", "VCU", "Hawaii",
+                     "Wichita St", "MTSU", "Ark Little Rock", "Gonzaga", 
+                     "Syracuse", "Wisconsin")
+teamsThatUpset17 = c("USC", "Xavier", "MTSU", "Wichita St", "Rhode Island",
+                     "Wisconsin", "Michigan", "South Carolina")
+teamsThatUpset18 = c("Marshall", "Butler", "UMBC", "Buffalo", "Loyola-Chicago",
+                     "Syracuse", "Florida St", "Texas A&M", "Kansas St")
+teamsThatUpset19 = c("Liberty", "Minnesota", "Murray St", "Florida", 
+                     "UC Irvine", "Oregon", "Iowa", "Ohio St", "Auburn")
+teamsThatUpset21 = c("Oregon St", "Syracuse", "Rutgers", "Ohio", "UCLA",
+                     "Abilene Chr", "Maryland", "North Texas", "Oral Roberts",
+                     "Loyola-Chicago", "USC")
+teamsThatUpset22 = c("New Mexico St", "Notre Dame", "St Peter's", "Michigan",
+                     "Richmond", "Iowa St", "Miami FL", "North Carolina", 
+                     "Houston", "Arkansas")
+
+
+means03 = map_dbl(teamsThatMatterStats03, mean)
+means04 = map_dbl(teamsThatMatterStats04, mean)
+means05 = map_dbl(teamsThatMatterStats05, mean)
+means06 = map_dbl(teamsThatMatterStats06, mean)
+means07 = map_dbl(teamsThatMatterStats07, mean)
+means08 = map_dbl(teamsThatMatterStats08, mean)
+means09 = map_dbl(teamsThatMatterStats09, mean)
+means10 = map_dbl(teamsThatMatterStats10, mean)
+means11 = map_dbl(teamsThatMatterStats11, mean)
+means12 = map_dbl(teamsThatMatterStats12, mean)
+means13 = map_dbl(teamsThatMatterStats13, mean)
+means14 = map_dbl(teamsThatMatterStats14, mean)
+means15 = map_dbl(teamsThatMatterStats15, mean)
+means16 = map_dbl(teamsThatMatterStats16, mean)
+means17 = map_dbl(teamsThatMatterStats17, mean)
+means18 = map_dbl(teamsThatMatterStats18, mean)
+means19 = map_dbl(teamsThatMatterStats19, mean)
+means21 = map_dbl(teamsThatMatterStats21, mean)
+means22 = map_dbl(teamsThatMatterStats22, mean)
+
+
+t = c(means03[8], 2, 3, 3.28, 2.04, 3.4, 4.66, 6.07)
+barplot(t)
+
+
+
+plot3d(teamstats$AvgBlocks, teamstats$AvgRebounds, teamstats$FTAttempts)
+scatter3D(teamstats$AvgBlocks, teamstats$AvgRebounds, teamstats$FTAttempts)
+scatterplot3d(teamstats$FTAttempts, teamstats$AvgRebounds, teamstats$AvgBlocks)
+
+with(teamstats, plot3d(teamstats$AvgBlocks, teamstats$AvgRebounds, 
+                       teamstats$FTAttempts))
+with(teamstats, text3d(teamstats$AvgBlocks, teamstats$AvgRebounds, 
+                       teamstats$FTAttempts, teamstats$Team, cex = 0.5))
+
+
+
+
+
+
+###########################################################################
+#GIF MAKER
+#########################################################################
+plot3d(teamstats$AvgBlocks, teamstats$AvgRebounds, teamstats$FTAttempts)
+text3d(teamstats$AvgBlocks, teamstats$AvgRebounds, 
+       teamstats$FTAttempts, teamstats$Team, cex = 0.5)
+play3d( spin3d( axis = c(0, 0, 1), rpm = 5), duration = 10 )
+movie3d(
+  movie="3dAnimatedScatterplot", 
+  spin3d( axis = c(0, 0, 1), rpm = 5),
+  duration = 10, 
+  dir = "C:/Users/Matthew/Desktop",
+  type = "gif", 
+  clean = TRUE
+)
+#############################################################################
